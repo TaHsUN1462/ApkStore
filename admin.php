@@ -40,13 +40,19 @@ if ($authed && isset($_GET['edit'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Admin - APK Store</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap');
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      transition: 200ms ease all; 
+      font-family: "Arimo", Sans-Serif;
+    }
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f5f5f5;
     color: #333;
     padding: 20px;
-    min-height: 100vh;
+    height: 100dvh;
   }
   h2 {
     margin-bottom: 15px;
@@ -83,7 +89,7 @@ if ($authed && isset($_GET['edit'])) {
     border-radius: 8px;
     color: white;
     font-size: 16px;
-    cursor: pointer;
+    
     transition: background 0.3s;
     display: block;
     width: 100%;
@@ -91,9 +97,15 @@ if ($authed && isset($_GET['edit'])) {
   button:hover {
     background: #3c9f42;
   }
+  .logout-form{
+    all: unset;
+  }
   .logout-btn {
-    max-width: 150px;
-    margin: 0 auto 30px auto;
+    width: max-content;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    padding: 8px 16px;
     background: #b33;
   }
   .logout-btn:hover {
@@ -102,24 +114,29 @@ if ($authed && isset($_GET['edit'])) {
   .app-list {
     max-width: 600px;
     margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   .app-row {
+    width: 100%;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     padding: 12px 15px;
-    margin-bottom: 12px;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 15px;
   }
   .app-row img {
+    justify-self: center;
     width: 50px;
     height: 50px;
     border-radius: 8px;
     object-fit: cover;
-    flex-shrink: 0;
   }
   .app-row b {
     flex-grow: 1;
@@ -130,6 +147,9 @@ if ($authed && isset($_GET['edit'])) {
   .app-row form {
     margin: 0;
     display: inline-flex;
+    background: none;
+    padding: 0;
+    border: none;
   }
   .app-row button {
     padding: 8px 14px;
@@ -139,18 +159,24 @@ if ($authed && isset($_GET['edit'])) {
     white-space: nowrap;
   }
   .app-row button.edit-btn {
+    width: 100%;
+    height: 50px;
     background: #2196F3;
   }
   .app-row button.edit-btn:hover {
     background: #1976D2;
   }
   .app-row button.delete-btn {
+    height: 50px;
+    width: 100%;
     background: #e53935;
   }
   .app-row button.delete-btn:hover {
     background: #b71c1c;
   }
-
+input:focus{
+  outline: 1px solid #000;
+}
   /* Responsive tweaks */
   @media (max-width: 480px) {
     .app-row {
@@ -180,7 +206,7 @@ if ($authed && isset($_GET['edit'])) {
   <form method="post" autocomplete="off" novalidate>
     <h2>Admin Login</h2>
     <label for="password">Enter Password</label>
-    <input type="password" id="password" name="password" placeholder="Password" required autofocus />
+    <input type="password" id="password" name="password" placeholder="Password" required />
     <button type="submit">Login</button>
   </form>
 <?php else: ?>
